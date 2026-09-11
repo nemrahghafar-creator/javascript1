@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Result Calculator</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .container {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.3);
+            text-align: center;
+            max-width: 500px;
+            width: 100%;
+            animation: slideUp 0.6s ease-out;
+        }
+
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        h1 {
+            color: #667eea;
+            margin-bottom: 25px;
+            font-size: 26px;
+        }
+
+        #result {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            color: #2d3748;
+            padding: 25px;
+            border-radius: 12px;
+            text-align: left;
+            white-space: pre-line;
+            font-family: 'Courier New', monospace;
+            font-size: 15px;
+            line-height: 1.9;
+            border-left: 5px solid #667eea;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🎓 Student Result Calculator 🎓</h1>
+        <div id="result">Loading...</div>
+    </div>
+
+    <script>
+        // 1. Get data using prompt
+        let Studentname = prompt("Enter your name");
+        let EnglishMarks = Number(prompt("Enter English Marks out of 100"));
+        let MathsMarks = Number(prompt("Enter Mathematics Marks out of 100"));
+        let ComputerMarks = Number(prompt("Enter Computer Marks out of 100"));
+        let ScienceMarks = Number(prompt("Enter Science Marks out of 100"));
+        let UrduMarks = Number(prompt("Enter Urdu Marks out of 100"));
+        
+        // 2. Calculate
+        let TotalMarks = EnglishMarks + MathsMarks + ComputerMarks + ScienceMarks + UrduMarks;
+        let Percentage = (TotalMarks/500)*100;
+        let Grade = "";
+
+        if(Percentage >=90){ Grade = "A+"; }
+        else if(Percentage >=80){ Grade = "A"; }
+        else if(Percentage >=70){ Grade = "B"; }
+        else if(Percentage >=60 ){ Grade = "C"; }
+        else if(Percentage >=50 ){ Grade = "D"; }
+        else { Grade = "FAIL"; }
+
+        // 3. Message
+        let message = "";
+        if(Grade == "A+" || Grade == "A"){ message = "🎉 Well Done! Keep it up!"; }
+        else if(Grade == "B" || Grade == "C"){ message = "👍 Good Job! Work Hard!"; }
+        else if(Grade == "D"){ message = "📚 You Passed. Need Improvement!"; }
+        else { message = "❌ Better Luck Next Time!"; }
+
+        // 4. Output
+        let output = `----- Student Result -----
+Student Name : ${Studentname}
+English      : ${EnglishMarks} / 100
+Mathematics  : ${MathsMarks} / 100
+Computer     : ${ComputerMarks} / 100
+Science      : ${ScienceMarks} / 100
+Urdu         : ${UrduMarks} / 100
+
+Total Marks  : ${TotalMarks} / 500
+Percentage   : ${Percentage.toFixed(2)}%
+Grade        : ${Grade}
+
+${message}`;
+
+        // Page pe show karo
+        document.getElementById("result").innerText = output;
+    </script>
+</body>
+</html>
